@@ -1,6 +1,7 @@
 import express from "express";
 import { login, register } from "../controllers/auth";
 import upload from "../configs/multer.config";
+import { verifyToken } from "../middleware/auth";
 
 const router = express.Router();
 
