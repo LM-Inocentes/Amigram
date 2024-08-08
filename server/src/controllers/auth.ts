@@ -32,15 +32,15 @@ export const register = async (req: Request, res: Response) => {
 
     // Create new User instance
     const newUser = new User({
-      firstName,
-      lastName,
+      firstname : firstName,
+      lastname : lastName,
       email,
       password,
-      picturePath: result.secure_url,
+      picturepath: result.secure_url,
       friends: friends || [],
       location,
       occupation,
-      viewedProfile: Math.floor(Math.random() * 10000),
+      viewedprofile: Math.floor(Math.random() * 10000),
       impressions: Math.floor(Math.random() * 10000),
     });
 

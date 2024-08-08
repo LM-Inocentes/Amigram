@@ -5,15 +5,15 @@ import createPool from '../configs/database.config'; // Adjust the import path a
 // Define the interface for User properties
 interface UserProps {
   id?: number;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
-  picturePath?: string;
+  picturepath?: string;
   friends?: string[];
   location?: string;
   occupation?: string;
-  viewedProfile?: number;
+  viewedprofile?: number;
   impressions?: number;
 }
 
@@ -42,27 +42,27 @@ class User {
 
   constructor({
     id,
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     email,
     password,
-    picturePath = "",
+    picturepath = "",
     friends = [],
     location = "",
     occupation = "",
-    viewedProfile = 0,
+    viewedprofile = 0,
     impressions = 0,
-  }: UserProps) {
+  }:UserProps) {
     this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.firstName = firstname;
+    this.lastName = lastname;
     this.email = email;
     this.password = password;
-    this.picturePath = picturePath;
+    this.picturePath = picturepath;
     this.friends = friends;
     this.location = location;
     this.occupation = occupation;
-    this.viewedProfile = viewedProfile;
+    this.viewedProfile = viewedprofile;
     this.impressions = impressions;
   }
 
@@ -76,7 +76,7 @@ class User {
     try {
       const result = await pool.query<UserRow>(
         `INSERT INTO userss (
-          first_name, last_name, email, password, picture_path, friends, location, occupation, viewed_profile, impressions
+          firstName, lastName, email, password, picturePath, friends, location, occupation, viewedProfile, impressions
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         RETURNING *`,
         [
@@ -107,7 +107,6 @@ class User {
         [email]
       );
       if (result.rows.length > 0) {
-        console.log(result.rows[0]);
         return new User(result.rows[0]);
       }
       return null;
@@ -137,8 +136,6 @@ class User {
   async comparePassword(candidatePassword: string): Promise<boolean> {
     try {
       const isMatch = await bcrypt.compare(candidatePassword, this.password);
-      console.log(candidatePassword);
-      console.log( this.password);
       return isMatch;
     } catch (error) {
       console.error(error);

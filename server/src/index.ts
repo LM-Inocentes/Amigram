@@ -13,7 +13,7 @@ import userRoutes from "./routers/user";
 const app = express();
 
 app.use(cors({
-    origin: ["deployed_app_url", "http://localhost:4200"],
+    origin: ["http://localhost:3000"],
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -27,7 +27,7 @@ app.options('*', cors());
 
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "deployed_app_url");
+    res.header("Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     if (req.method === 'OPTIONS') {
